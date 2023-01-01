@@ -27,6 +27,7 @@ import { defaultScmResolveUrl } from './helpers';
 import { ScmIntegration, ScmIntegrationsGroup } from './types';
 import { ScmIntegrationRegistry } from './registry';
 import { GiteaIntegration } from './gitea';
+import { RubygemsIntegration } from './rubygems';
 
 /**
  * The set of supported integrations.
@@ -46,6 +47,7 @@ export interface IntegrationsByType {
   github: ScmIntegrationsGroup<GithubIntegration>;
   gitlab: ScmIntegrationsGroup<GitLabIntegration>;
   gitea: ScmIntegrationsGroup<GiteaIntegration>;
+  rubygems: ScmIntegrationsGroup<RubygemsIntegration>;
 }
 
 /**
@@ -67,6 +69,7 @@ export class ScmIntegrations implements ScmIntegrationRegistry {
       github: GithubIntegration.factory({ config }),
       gitlab: GitLabIntegration.factory({ config }),
       gitea: GiteaIntegration.factory({ config }),
+      rubygems: RubygemsIntegration.factory({ config }),
     });
   }
 
@@ -111,6 +114,10 @@ export class ScmIntegrations implements ScmIntegrationRegistry {
 
   get gitea(): ScmIntegrationsGroup<GiteaIntegration> {
     return this.byType.gitea;
+  }
+
+  get rubygems(): ScmIntegrationsGroup<RubygemsIntegration> {
+    return this.byType.rubygems;
   }
 
   list(): ScmIntegration[] {

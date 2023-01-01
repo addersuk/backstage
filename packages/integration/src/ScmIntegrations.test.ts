@@ -33,6 +33,7 @@ import { GithubIntegrationConfig } from './github';
 import { GithubIntegration } from './github/GithubIntegration';
 import { GitLabIntegrationConfig } from './gitlab';
 import { GitLabIntegration } from './gitlab/GitLabIntegration';
+import { RubygemsIntegration, RubygemsIntegrationConfig } from './rubygems';
 import { basicIntegrations } from './helpers';
 import { ScmIntegrations } from './ScmIntegrations';
 import { GiteaIntegration, GiteaIntegrationConfig } from './gitea';
@@ -74,6 +75,10 @@ describe('ScmIntegrations', () => {
     host: 'gitea.local',
   } as GiteaIntegrationConfig);
 
+  const rubygems = new RubygemsIntegration({
+    host: 'rubygems.local',
+  } as RubygemsIntegrationConfig);
+
   const i = new ScmIntegrations({
     awsS3: basicIntegrations([awsS3], item => item.config.host),
     azure: basicIntegrations([azure], item => item.config.host),
@@ -87,6 +92,7 @@ describe('ScmIntegrations', () => {
     github: basicIntegrations([github], item => item.config.host),
     gitlab: basicIntegrations([gitlab], item => item.config.host),
     gitea: basicIntegrations([gitea], item => item.config.host),
+    rubygems: basicIntegrations([rubygems], item => item.config.host),
   });
 
   it('can get the specifics', () => {
@@ -117,6 +123,7 @@ describe('ScmIntegrations', () => {
         github,
         gitlab,
         gitea,
+        rubygems,
       ]),
     );
   });
@@ -141,6 +148,7 @@ describe('ScmIntegrations', () => {
     expect(i.byHost('github.local')).toBe(github);
     expect(i.byHost('gitlab.local')).toBe(gitlab);
     expect(i.byHost('gitea.local')).toBe(gitea);
+    expect(i.byHost('rubygems.local')).toBe(rubygems);
   });
 
   it('can resolveUrl using fallback', () => {

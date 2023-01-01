@@ -24,6 +24,7 @@ export { GitlabUrlReader } from './GitlabUrlReader';
 export { GiteaUrlReader } from './GiteaUrlReader';
 export { AwsS3UrlReader } from './AwsS3UrlReader';
 export { FetchUrlReader } from './FetchUrlReader';
+export { RubygemsUrlReader } from './RubygemsUrlReader';
 export { ReadUrlResponseFactory } from './ReadUrlResponseFactory';
 export type {
   FromReadableArrayOptions,
